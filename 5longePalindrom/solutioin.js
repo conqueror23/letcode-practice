@@ -22,35 +22,30 @@ const getCMap=(input)=>{
 }
 
 
-const ifPalindemic = (input) => {
-    const cMap = getCMap(input)
-    const longestPal="";
-    cMap.forEach((result,key)=>{
-        if(result.length>1){
-           let left = 0;
-           let right = result.length-1
-            while(left < right){
-                if(input[left]==input[right]){
-                    left=+1;
-                    right-=1;
-
-                }else{
-
-                }
-
-
-
-            }
-
+const ifPalindemic = (input,left,right) => {
+    let temp ='';
+    let pendingLeft =left;
+    let pendingright =right
+    while(pendingLeft<pendingright){
+        if(input[pendingLeft] == input[pendingright]){
+            pendingLeft=pendingLeft+1;
+            pendingright= pendingright-1;
+        }else{
+            return temp;
         }
-    })
+    }
+    temp = input.slice(left,right+1)
+    return temp
 
-    return cMap
 };
+
+console.log(ifPalindemic('aaca',0,3))
+
 
 const longestPal = (getLongestPal = (input) => {
   const tempLongest = {};
-  const isPalind = ifPalindemic(input);
+  const cMap = getCMap(input)
+  const isPalind = ifPalindemic(input,3,5);
   return isPalind;
 });
 
