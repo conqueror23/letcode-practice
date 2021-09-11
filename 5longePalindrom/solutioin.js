@@ -1,50 +1,57 @@
-const testA= "ababdcddfe1efddd"
+const testA = "ababdcddfe1efddd";
 
 
-const ifPalindemic=(input)=>{
-    const b= [...testA]
-    const d = {};
-    b.forEach((c,index)=>{
-        if(d[c]){
-            d[c] = [d[c],index]
-        }else {
-            d[c] = index
-        }
-
-    })
-    console.log(JSON.stringify(d))
-    const cMap = new Map();
-    b.forEach((c,index)=>{
-        cPreIndex = cMap.get(c);
-        if(cPreIndex && cPreIndex.constructor.name ==='array'){
-        cMap.set(c,[...cPreIndex,index])
-        }else{
-            cMap.set(c,index)
-        }
-
-    })
-    return cMap
-    leftPos = 0;
-    rightPos =input.length ;
-    while(leftPos<rightPos){
-        if(input[leftPos]==rightPos){
-            
-        }else{
-
-        }
+const getCMap=(input)=>{
+  const b = [...testA];
+  const d = new Map();
+  b.forEach((c, index) => {
+    if (d.get(c)) {
+      if (d.get(c).length > 1) {
+        d.set(c, [...d.get(c), index]);
+      } else {
+          d.set(c,[d.get(c),index])
+      }
+    }else{
+        d.set(c,index)
     }
-    
+  });
 
+  return d
 
 
 }
 
-const longestPal = getLongestPal=(input)=>{
-    const tempLongest = {};
-    const isPalind = ifPalindemic(input) 
-    return isPalind
 
-}
+const ifPalindemic = (input) => {
+    const cMap = getCMap(input)
+    const longestPal="";
+    cMap.forEach((result,key)=>{
+        if(result.length>1){
+           let left = 0;
+           let right = result.length-1
+            while(left < right){
+                if(input[left]==input[right]){
+                    left=+1;
+                    right-=1;
+
+                }else{
+
+                }
 
 
-console.log(longestPal(testA))
+
+            }
+
+        }
+    })
+
+    return cMap
+};
+
+const longestPal = (getLongestPal = (input) => {
+  const tempLongest = {};
+  const isPalind = ifPalindemic(input);
+  return isPalind;
+});
+
+console.log(longestPal(testA));
